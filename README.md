@@ -87,27 +87,48 @@ claude
 
 ### `.ai/` ディレクトリ（最重要）
 
-このディレクトリはAI開発アシスタントとの協働のコアです：
+このディレクトリは**高度なAI知識管理システム**のコアです：
 
-- **`CLAUDE.md`**: Claude Codeの完全な作業指示書
-  - 環境構築からデプロイまでの全手順
-  - よくあるエラーと解決策
-  - プロジェクト固有の設定情報
+#### 🧠 知識管理システム v2.0
+```
+.ai/knowledge/
+├── current/              # アクティブな知識ベース
+│   ├── troubleshooting.md    # 構造化された問題・解決策（ID付き）
+│   ├── tech-notes.md         # 技術的決定事項（ID付き）
+│   └── lessons-learned.md    # パターン・ベストプラクティス（ID付き）
+├── index.json           # 検索可能なメタデータ
+├── knowledge-graph.json # 知識間の関係性マッピング
+├── archive/            # 月別アーカイブ
+└── scripts/            # 知識管理ユーティリティ
+```
 
-- **`troubleshooting.md`**: 過去のエラーと解決策
-  - 実際に発生したエラーメッセージ
-  - 段階的な解決手順
-  - 予防策
+#### 🎯 主要な機能
+- **構造化された知識**: 各エントリーに一意ID（k001、k002...）
+- **関係性マッピング**: 知識グラフで問題→解決策→パターンを関連付け
+- **コンテキスト検索**: 開発状況に応じた知識の自動発見
+- **バージョン管理**: 技術スタックバージョンとの互換性管理
+- **自動化ツール**: CLI経由での知識検索・管理
 
-- **`tech-notes.md`**: 技術的決定の記録
-  - ライブラリ選定の理由
-  - アーキテクチャの方針
-  - パフォーマンス考慮事項
+#### 🛠️ 知識管理ツール
+```bash
+# 知識検索
+node .ai/scripts/knowledge-manager.cjs search "typescript generics"
 
-- **`lessons-learned.md`**: 開発で学んだ知識
-  - ベストプラクティス
-  - アンチパターン
-  - 効率化のヒント
+# 関連知識の探索  
+node .ai/scripts/knowledge-manager.cjs related k007
+
+# 新エントリー作成
+node .ai/scripts/knowledge-manager.cjs add-entry problem
+
+# 整合性チェック
+node .ai/scripts/knowledge-manager.cjs validate
+```
+
+#### 📊 現在の知識ベース
+- **30+ 構造化エントリー**: 問題、解決策、パターン、技術決定
+- **10+ 関係性**: 知識グラフでの相互関連
+- **6つのコンテキストパターン**: AI の文脈理解用
+- **バージョン対応**: React、TypeScript、Vite等の互換性情報
 
 ### `.claude/settings.json`
 

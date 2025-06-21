@@ -122,11 +122,86 @@ claude update
 - セキュリティ設定の無効化
 - 機密情報のプレーンテキスト保存
 
+## 知識管理システム（重要！）
+
+### 新しい知識ベース構造
+```
+.ai/knowledge/
+├── current/           # 現在アクティブな知識
+│   ├── troubleshooting.md  # 問題と解決策（ID付き）
+│   ├── tech-notes.md       # 技術的決定事項（ID付き）
+│   └── lessons-learned.md  # 学習した知識（ID付き）
+├── index.json        # 検索可能なメタデータ
+├── knowledge-graph.json    # 知識間の関係性
+├── archive/          # 過去の知識アーカイブ
+└── tags/            # タグ別整理
+```
+
+### 知識の記録ルール（必須）
+1. **新しい問題/解決策は必ず一意のIDを付与**
+   - 形式: `k001`, `k002` など
+   - 自動採番: `node .ai/scripts/knowledge-manager.js add-entry`
+
+2. **必ずバージョン情報を記録**
+   ```yaml
+   versions:
+     vite: ">=4.0.0"
+     react: ">=18.0.0"
+   ```
+
+3. **関連する知識がある場合はリンクを作成**
+   ```
+   ### 関連知識
+   - k002: prism-react-renderer solution
+   - k003: React + Vite互換性パターン
+   ```
+
+4. **index.jsonとknowledge-graph.jsonを同時更新**
+   - 手動更新または知識管理スクリプトを使用
+
+### 知識の検索ルール
+1. **現在のコンテキストから関連キーワードを抽出**
+   ```bash
+   node .ai/scripts/knowledge-manager.js search "vite build error"
+   ```
+
+2. **コンテキストパターンでマッチング**
+   ```bash
+   node .ai/scripts/knowledge-manager.js context-search vite import resolve
+   ```
+
+3. **知識グラフで関連知識を辿る**
+   ```bash
+   node .ai/scripts/knowledge-manager.js related k001
+   ```
+
+4. **バージョン互換性を確認**
+   - `applicable_versions`フィールドをチェック
+
+### 知識管理ユーティリティ
+```bash
+# 知識検索
+node .ai/scripts/knowledge-manager.js search "typescript generics"
+
+# 関連知識の探索
+node .ai/scripts/knowledge-manager.js related k007
+
+# 新エントリーテンプレート生成
+node .ai/scripts/knowledge-manager.js add-entry problem
+
+# 知識ベース検証
+node .ai/scripts/knowledge-manager.js validate
+
+# 統計情報
+node .ai/scripts/knowledge-manager.js stats
+```
+
 ## 前提条件
 1. **必ず以下のドキュメントを参照してから作業を開始**
-   - `.ai/troubleshooting.md` - 過去のエラーと解決策
-   - `.ai/tech-notes.md` - 技術的決定事項
-   - `.ai/lessons-learned.md` - 学習した知識
+   - `.ai/knowledge/current/troubleshooting.md` - 過去のエラーと解決策
+   - `.ai/knowledge/current/tech-notes.md` - 技術的決定事項
+   - `.ai/knowledge/current/lessons-learned.md` - 学習した知識
+   - `.ai/knowledge/index.json` - 検索可能な知識メタデータ
 
 2. **開発環境**
    - WSL2 (Linux環境)

@@ -2,23 +2,37 @@
 
 このドキュメントは、プロジェクト開発中に発生した問題と解決策を記録します。
 
-## 2025-06-21
+---
+id: k001
+title: prismjs Vite build error
+date: 2025-06-21
+tags: [build-error, vite, library]
+versions:
+  vite: ">=4.0.0"
+  react: ">=18.0.0"
+  prismjs: "1.29.0"
+severity: high
+---
 
-### prismjsビルドエラー
-**エラーメッセージ:**
+### 問題
+Viteでprismjsをインポートしたときにモジュールresolutionエラーが発生
+
+### エラーメッセージ
 ```
 Cannot find module 'prismjs/components/prism-javascript'
 ```
 
-**発生状況:**
+### 発生状況
 - Viteでビルド実行時
 - prismjsをインポートしようとした際
 
-**原因:**
+### 原因
 - prismjsのモジュール解決がViteと互換性がない
 - ESモジュールとCommonJSの混在問題
 
-**解決方法:**
+### 解決策
+prism-react-rendererに切り替えることで解決（→ k002）
+
 ```bash
 # prismjsをアンインストール
 npm uninstall prismjs @types/prismjs
@@ -27,22 +41,37 @@ npm uninstall prismjs @types/prismjs
 npm install prism-react-renderer
 ```
 
-**予防策:**
+### 関連知識
+- k002: prism-react-renderer solution
+- k003: React + Vite互換性パターン
+
+### 予防策
 - Viteプロジェクトではprism-react-rendererを使用
 - ビルドツールとの互換性を事前確認
 
 ---
+id: k004
+title: WSL localhost access issue
+date: 2025-06-21
+tags: [wsl, network, vite]
+versions:
+  vite: ">=4.0.0"
+  wsl: "2.0"
+severity: medium
+---
 
-### WSL環境でのlocalhost接続問題
-**問題:**
+### 問題
+WSL環境でVite開発サーバーにブラウザからアクセスできない
+
+### 発生状況
 - WSL環境でnpm run devを実行
 - ブラウザからhttp://localhost:5173にアクセスできない
 
-**原因:**
+### 原因
 - WSLのネットワーク設定
 - Viteのデフォルトホスト設定が127.0.0.1
 
-**解決方法:**
+### 解決策
 ```typescript
 // vite.config.ts
 export default defineConfig({
@@ -53,23 +82,37 @@ export default defineConfig({
 })
 ```
 
-**予防策:**
+### 関連知識
+- k005: WSL network configuration patterns
+
+### 予防策
 - WSL環境では常にhost: '0.0.0.0'を設定
 - ネットワークURLも確認可能に
 
 ---
+id: k006
+title: TypeScript generic type inference error
+date: 2025-06-21
+tags: [typescript, generics, hooks]
+versions:
+  typescript: ">=5.0.0"
+  react: ">=18.0.0"
+severity: medium
+---
 
-### TypeScriptの型エラー (useLocalStorage)
-**エラーメッセージ:**
+### 問題
+useLocalStorageフックでジェネリック型の推論エラー
+
+### エラーメッセージ
 ```
 Type 'Memo[]' is not assignable to type 'never[]'
 ```
 
-**発生状況:**
+### 発生状況
 - useLocalStorageフックを使用時
 - ジェネリック型の推論エラー
 
-**解決方法:**
+### 解決策
 ```typescript
 // 明示的に型を指定
 export function useMemosStorage() {
@@ -77,57 +120,94 @@ export function useMemosStorage() {
 }
 ```
 
-**予防策:**
+### 関連知識
+- k007: TypeScript generics best practices
+
+### 予防策
 - カスタムフックでは明示的な型指定
 - ジェネリック型の正しい使用
 
 ---
+id: k008
+title: marked.js async type error
+date: 2025-06-21
+tags: [markdown, types, async]
+versions:
+  marked: ">=4.0.0"
+severity: low
+---
 
-### marked.jsの非同期処理エラー
-**エラーメッセージ:**
+### 問題
+marked(markdown)の返り値の型エラー
+
+### エラーメッセージ
 ```
 Type 'string | Promise<string>' is not assignable to type 'string'
 ```
 
-**発生状況:**
-- marked(markdown)の返り値の型エラー
-
-**解決方法:**
+### 解決策
 ```typescript
 const result = marked(markdown);
 return typeof result === 'string' ? result : markdown;
 ```
 
-**予防策:**
+### 関連知識
+- k009: Library type handling patterns
+
+### 予防策
 - ライブラリのAPIドキュメントを確認
 - 返り値の型を適切に処理
 
 ---
+id: k010
+title: ESLint no-explicit-any error
+date: 2025-06-21
+tags: [eslint, typescript, code-quality]
+versions:
+  eslint: ">=8.0.0"
+  typescript: ">=5.0.0"
+severity: low
+---
 
-### ESLintエラー: no-explicit-any
-**エラーメッセージ:**
+### 問題
+ESLint の no-explicit-any ルールエラー
+
+### エラーメッセージ
 ```
 Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 ```
 
-**解決方法:**
+### 解決策
 - 具体的な型を定義
 - やむを得ない場合はunknownを使用
 - 型推論に任せる
 
-**予防策:**
+### 関連知識
+- k007: TypeScript best practices
+
+### 予防策
 - tsconfig.jsonでstrictモードを有効化
 - 型定義を徹底
 
 ---
+id: k011
+title: ESLint no-prototype-builtins error
+date: 2025-06-21
+tags: [eslint, javascript, prototype]
+versions:
+  eslint: ">=8.0.0"
+severity: low
+---
 
-### ESLintエラー: no-prototype-builtins
-**エラーメッセージ:**
+### 問題
+プロトタイプメソッドの直接アクセスエラー
+
+### エラーメッセージ
 ```
 Do not access Object.prototype method 'hasOwnProperty' from target object
 ```
 
-**解決方法:**
+### 解決策
 ```typescript
 // 修正前
 if (localStorage.hasOwnProperty(key))
@@ -136,51 +216,45 @@ if (localStorage.hasOwnProperty(key))
 if (Object.prototype.hasOwnProperty.call(localStorage, key))
 ```
 
-**予防策:**
+### 関連知識
+- k012: JavaScript prototype patterns
+
+### 予防策
 - プロトタイプメソッドの直接呼び出しを避ける
 - ESLint推奨パターンに従う
 
 ---
+id: k013
+title: Git authentication error in WSL
+date: 2025-06-21
+tags: [git, authentication, wsl]
+versions:
+  git: ">=2.30.0"
+  wsl: "2.0"
+severity: medium
+---
 
-### Git認証エラー
-**エラーメッセージ:**
+### 問題
+WSL環境でgit pushコマンド実行時の認証エラー
+
+### エラーメッセージ
 ```
 fatal: could not read Username for 'https://github.com': No such device or address
 ```
 
-**発生状況:**
-- git pushコマンド実行時
-- WSL環境での認証問題
-
-**解決方法:**
+### 解決策
 1. Personal Access Token (PAT)を作成
 2. git config --global credential.helper store
 3. 手動でgit pushして認証情報を入力
 
-**予防策:**
+### 関連知識
+- k014: Git authentication patterns
+- k015: WSL credential management
+
+### 予防策
 - GitHub CLIの使用を検討
 - SSH認証の設定
 - 認証情報の安全な管理
-
----
-
-### CSS @importの警告
-**警告メッセージ:**
-```
-@import must precede all other statements (besides @charset or empty @layer)
-```
-
-**発生状況:**
-- Viteビルド時の警告
-- Tailwind CSSの後に@importを配置
-
-**解決方法:**
-- 警告は機能に影響なし（現状維持）
-- 必要に応じてPostCSS設定で対応
-
-**予防策:**
-- CSSの@import順序に注意
-- PostCSSプラグインの活用
 
 ---
 
