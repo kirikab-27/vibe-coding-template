@@ -84,4 +84,4 @@ pids
 # Project specific temp files
 tmp/
 temp/
-.temp/
+.temp/test-release/

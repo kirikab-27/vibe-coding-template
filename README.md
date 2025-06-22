@@ -1,4 +1,8 @@
-# 🚀 VIBE Coding Template
+# 🚀 vibe-coding-template
+
+![Version](https://img.shields.io/badge/version-v2.2.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Knowledge Entries](https://img.shields.io/badge/knowledge_entries-207-brightgreen)
 
 **AI開発用プロジェクトテンプレート**
 
