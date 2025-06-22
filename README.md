@@ -44,7 +44,13 @@ cd my-new-project
 git init
 ```
 
-### 2. プロジェクト情報の更新
+### 2. 知識管理システムの初期化
+
+```bash
+npm run setup:knowledge
+```
+
+### 3. プロジェクト情報の更新
 
 **重要**: 以下のファイルを必ず更新してください
 
@@ -67,13 +73,13 @@ git init
 }
 ```
 
-### 3. 依存関係のインストール
+### 4. 依存関係のインストール
 
 ```bash
 npm install
 ```
 
-### 4. 開発開始
+### 5. 開発開始
 
 ```bash
 # 開発サーバー起動
@@ -89,13 +95,25 @@ claude
 
 このディレクトリは**高度なAI知識管理システム**のコアです：
 
-#### 🧠 知識管理システム v2.0
+### 知識管理システム v2.1
+- **共有知識**: ~/.vibe-knowledge に全プロジェクトの知識を集約
+- **ローカル知識**: current-local/ にプロジェクト固有の知識
+- **自動共有**: どのプロジェクトで得た知見も即座に全体で利用可能
+
+初期セットアップ：
+```bash
+node .ai/scripts/setup-knowledge-sharing.js
+```
+
+#### 🧠 知識管理システム構造
 ```
 .ai/knowledge/
-├── current/              # アクティブな知識ベース
+├── current-local/        # プロジェクト固有の知識
 │   ├── troubleshooting.md    # 構造化された問題・解決策（ID付き）
 │   ├── tech-notes.md         # 技術的決定事項（ID付き）
 │   └── lessons-learned.md    # パターン・ベストプラクティス（ID付き）
+├── shared/              # 全プロジェクト共有知識（シンボリックリンク）
+├── shared-index.json    # 共有知識インデックス（シンボリックリンク）
 ├── index.json           # 検索可能なメタデータ
 ├── knowledge-graph.json # 知識間の関係性マッピング
 ├── archive/            # 月別アーカイブ
@@ -221,6 +239,9 @@ claude -p \"/config\"
    # テンプレートコピー
    cp -r vibe-coding-template my-project
    cd my-project
+   
+   # 共有知識システムセットアップ
+   npm run setup:knowledge
    
    # Claude Code で設定確認
    claude -p \"/config\"

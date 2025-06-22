@@ -236,8 +236,6 @@ node .ai/scripts/knowledge-manager.js stats
 
 ## STEP1-5: 環境構築
 
-**⚠️ 以下はReact+TypeScript+Viteの例です。プロジェクトに合わせてコマンドを更新してください**
-
 ### STEP1: プロジェクト初期化
 ```bash
 # React + TypeScript + Viteの場合
@@ -260,7 +258,16 @@ cd [プロジェクト名]
 **解決:** [解決方法]
 ```
 
-### STEP2: 依存関係インストール
+## STEP 2: 知識管理システムの初期化
+以下のコマンドを実行して共有知識システムをセットアップ：
+```bash
+node .ai/scripts/setup-knowledge-sharing.js
+```
+これにより：
+- current-local/: プロジェクト固有の知識
+- shared/: 全プロジェクト共有の知識（シンボリックリンク）
+
+### STEP3: 依存関係インストール
 ```bash
 npm install
 
@@ -288,7 +295,7 @@ npm install
   - TypeScript型定義が充実
 ```
 
-### STEP3: Tailwind CSS設定
+### STEP4: Tailwind CSS設定
 ```bash
 npx tailwindcss init -p
 ```
@@ -299,7 +306,7 @@ npx tailwindcss init -p
 content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"]
 ```
 
-### STEP4: TypeScript設定
+### STEP5: TypeScript設定
 ```json
 // tsconfig.json
 {
@@ -311,7 +318,7 @@ content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"]
 }
 ```
 
-### STEP5: 開発サーバー設定
+### STEP6: 開発サーバー設定
 ```typescript
 // vite.config.ts
 server: {
@@ -328,9 +335,9 @@ server: {
 **解決:** vite.config.tsでhost: '0.0.0.0'を設定
 ```
 
-## STEP6-10: 基本機能実装
+## STEP7-11: 基本機能実装
 
-### STEP6: ディレクトリ構造
+### STEP7: ディレクトリ構造
 ```
 src/
 ├── components/     # Reactコンポーネント
@@ -340,7 +347,7 @@ src/
 └── styles/        # CSS/スタイルファイル
 ```
 
-### STEP7: 型定義
+### STEP8: 型定義
 ```typescript
 // src/types/[Entity].ts
 // プロジェクトのドメインに合わせて型定義を作成
@@ -362,7 +369,7 @@ export interface [EntityName] {
 // }
 ```
 
-### STEP8: 基本コンポーネント作成
+### STEP9: 基本コンポーネント作成
 **プロジェクトのドメインに合わせてコンポーネントを作成**
 
 例:
@@ -380,7 +387,7 @@ export interface [EntityName] {
 - TypeScriptで型安全性を確保
 ```
 
-### STEP9: 状態管理
+### STEP10: 状態管理
 ```typescript
 // プロジェクトの規模に応じて状態管理手法を選択
 
@@ -398,7 +405,7 @@ const [items, setItems] = useState<EntityType[]>([]);
 // import { configureStore, createSlice } from '@reduxjs/toolkit'
 ```
 
-### STEP10: Git初期化とコミット
+### STEP11: Git初期化とコミット
 ```bash
 git init
 git add .
@@ -412,9 +419,9 @@ git commit -m "feat: 初期実装"
 - style: フォーマット
 - refactor: リファクタリング
 
-## STEP11-15: 高度な機能
+## STEP12-16: 高度な機能
 
-### STEP11-12: プロジェクト固有の機能実装
+### STEP12-13: プロジェクト固有の機能実装
 **⚠️ 以下はマークダウンエディタの例です。プロジェクトに合わせて更新してください**
 
 ```typescript
@@ -447,7 +454,7 @@ git commit -m "feat: 初期実装"
 - [代替案2]: [比較ポイント]
 ```
 
-### STEP13: データ永続化
+### STEP14: データ永続化
 ```typescript
 // プロジェクトの要件に応じてデータ永続化を実装
 
@@ -477,7 +484,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 - 型安全性の確保 (ジェネリクス使用)
 ```
 
-### STEP14: プロジェクト固有のUI機能
+### STEP15: プロジェクト固有のUI機能
 **プロジェクトの要件に応じてUI機能を実装**
 
 例:
@@ -488,7 +495,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 - ローディング状態
 - エラーハンドリング
 
-### STEP15: エラーバウンダリ
+### STEP16: エラーバウンダリ
 ```typescript
 // エラー境界の実装（オプション）
 class ErrorBoundary extends React.Component {
@@ -496,9 +503,9 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-## STEP16-20: 品質保証とドキュメント化
+## STEP17-21: 品質保証とドキュメント化
 
-### STEP16: Linting設定
+### STEP17: Linting設定
 ```bash
 npm run lint
 ```
@@ -512,7 +519,7 @@ npm run lint
 **解決:** Object.prototype.hasOwnProperty.call()を使用
 ```
 
-### STEP17: ビルド最適化
+### STEP18: ビルド最適化
 ```bash
 npm run build
 ```
@@ -526,12 +533,12 @@ npm run build
 - 手法: 動的インポート、Tree shaking
 ```
 
-### STEP18: テスト（オプション）
+### STEP19: テスト（オプション）
 ```bash
 npm test
 ```
 
-## STEP 19: 開発セッション完了時の知識蓄積
+## STEP 20: 開発セッション完了時の知識蓄積
 開発が完了したら、必ず以下を実行すること：
 
 ### 必須記録項目
@@ -564,7 +571,7 @@ npm test
 git diff .ai/knowledge/current/
 ```
 
-## STEP 20: README.md の更新
+## STEP 21: README.md の更新
 プロジェクト固有のREADME.mdを必ず更新：
 - プロジェクト名と説明
 - 実装した機能一覧

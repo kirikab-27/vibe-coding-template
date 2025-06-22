@@ -77,6 +77,10 @@ pids
 .ai/temp/
 *.draft.md
 
+# 共有知識へのシンボリックリンク
+.ai/knowledge/shared
+.ai/knowledge/shared-index.json
+
 # Project specific temp files
 tmp/
 temp/
