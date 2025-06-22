@@ -357,6 +357,70 @@ class KnowledgeManager {
       }
     }
   }
+
+  /**
+   * Check if knowledge has been updated today
+   */
+  checkDevelopmentCompletion() {
+    const today = new Date().toISOString().split('T')[0];
+    const journalPath = path.join(this.knowledgePath, 'journal', `${today}.md`);
+    
+    console.log('\n🔍 開発完了チェック');
+    console.log('================================');
+    
+    // Check if journal entry exists for today
+    const journalExists = fs.existsSync(journalPath);
+    if (!journalExists) {
+      console.log('⚠️  本日のjournal記録がありません');
+    } else {
+      console.log('✅ journal記録済み');
+    }
+    
+    // Check for recent knowledge additions
+    const todaysEntries = this.index.entries.filter(entry => entry.date === today);
+    console.log(`\n📝 本日追加された知識: ${todaysEntries.length}件`);
+    
+    if (todaysEntries.length === 0) {
+      console.log('⚠️  新しい知識が記録されていません。以下を確認してください:');
+      console.log('   - lessons-learned.md に新しいパターンを追加');
+      console.log('   - tech-notes.md に技術的決定を記録');
+      console.log('   - troubleshooting.md にエラーと解決策を記録');
+    } else {
+      todaysEntries.forEach(entry => {
+        console.log(`   - [${entry.id}] ${entry.title}`);
+      });
+    }
+    
+    // Show reminder
+    console.log('\n📌 開発完了時のチェックリスト:');
+    console.log('   1. lessons-learned.md に今回の学びを記録');
+    console.log('   2. tech-notes.md に技術的決定を記録');
+    console.log('   3. journal/YYYY-MM-DD.md に開発記録を追加');
+    console.log('   4. troubleshooting.md にエラー情報を記録（エラーがない場合も記録）');
+    console.log('   5. README.md をプロジェクト情報で更新');
+    
+    return {
+      journalExists,
+      todaysEntries: todaysEntries.length,
+      isComplete: journalExists && todaysEntries.length > 0
+    };
+  }
+
+  /**
+   * Create development reminder
+   */
+  createDevelopmentReminder() {
+    const reminders = [
+      '💡 開発で新しいパターンを発見しましたか？ lessons-learned.md に記録しましょう',
+      '🔧 技術的な決定をしましたか？ tech-notes.md に理由と共に記録しましょう',
+      '🐛 エラーに遭遇しましたか？ troubleshooting.md に解決策を記録しましょう',
+      '📝 開発が完了したら journal にサマリーを記録しましょう',
+      '📚 過去の知識を活用しましたか？ 使用した知識IDを記録しましょう'
+    ];
+    
+    const randomReminder = reminders[Math.floor(Math.random() * reminders.length)];
+    console.log(`\n${randomReminder}`);
+  }
 }
 
 // CLI Interface
@@ -441,6 +505,14 @@ function main() {
       km.stats();
       break;
       
+    case 'check-completion':
+      km.checkDevelopmentCompletion();
+      break;
+      
+    case 'reminder':
+      km.createDevelopmentReminder();
+      break;
+      
     default:
       console.log('🛠️  Knowledge Manager CLI');
       console.log('Usage:');
@@ -451,6 +523,8 @@ function main() {
       console.log('  validate                 - Validate knowledge base');
       console.log('  archive YYYY-MM          - Archive entries by month');
       console.log('  stats                    - Show statistics');
+      console.log('  check-completion         - Check development completion');
+      console.log('  reminder                 - Show development reminder');
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "last_updated": "2025-06-21T23:33:00Z",
+  "last_updated": "2025-06-22T00:00:00Z",
   "entries": [
     {
       "id": "k001",
@@ -271,15 +271,30 @@
       "context": {
         "project_type": "react-typescript"
       }
+    },
+    {
+      "id": "k031",
+      "title": "Claude Codeへの効果的な指示方法",
+      "type": "lesson",
+      "tags": ["claude-code", "best-practice", "workflow"],
+      "date": "2025-06-22",
+      "file": "current/lessons-learned.md#k031",
+      "keywords": ["claude-code", "instruction", "file-path", "best-practice"],
+      "importance": "high",
+      "context": {
+        "tool": "claude-code",
+        "category": "workflow"
+      }
     }
   ],
   "statistics": {
-    "total_entries": 16,
+    "total_entries": 17,
     "by_type": {
       "problem": 7,
       "solution": 2,
       "pattern": 4,
-      "decision": 3
+      "decision": 3,
+      "lesson": 1
     },
     "by_severity": {
       "high": 1,
