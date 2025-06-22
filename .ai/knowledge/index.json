@@ -273,6 +273,96 @@
       }
     },
     {
+      "id": "k014",
+      "title": "Monorepo \"No tasks were executed\" error",
+      "type": "problem",
+      "tags": ["monorepo", "turborepo", "pnpm", "build-error"],
+      "date": "2025-06-22",
+      "file": "current-local/troubleshooting.md#k014",
+      "keywords": ["monorepo", "turborepo", "pnpm", "no-tasks", "executed", "build"],
+      "applicable_versions": {
+        "pnpm": "latest",
+        "turborepo": "latest"
+      },
+      "context": {
+        "project_type": "monorepo",
+        "build_tool": "turborepo"
+      },
+      "severity": "high"
+    },
+    {
+      "id": "k015",
+      "title": "PostgreSQL peer authentication error",
+      "type": "problem",
+      "tags": ["postgresql", "authentication", "pg_hba", "database"],
+      "date": "2025-06-22",
+      "file": "current-local/troubleshooting.md#k015",
+      "keywords": ["postgresql", "authentication", "peer", "md5", "pg_hba", "trust"],
+      "applicable_versions": {
+        "postgresql": ">=14.0"
+      },
+      "context": {
+        "database": "postgresql",
+        "environment": "development"
+      },
+      "severity": "high"
+    },
+    {
+      "id": "k016",
+      "title": "Prisma schema file placement error",
+      "type": "problem",
+      "tags": ["prisma", "database", "schema", "file-structure"],
+      "date": "2025-06-22",
+      "file": "current-local/troubleshooting.md#k016",
+      "keywords": ["prisma", "schema", "placement", "directory", "structure"],
+      "applicable_versions": {
+        "prisma": ">=4.0.0"
+      },
+      "context": {
+        "database": "prisma",
+        "project_type": "monorepo"
+      },
+      "severity": "medium"
+    },
+    {
+      "id": "k017",
+      "title": "Monorepo environment variable inheritance problem",
+      "type": "problem",
+      "tags": ["monorepo", "environment-variables", "turborepo", "configuration"],
+      "date": "2025-06-22",
+      "file": "current-local/troubleshooting.md#k017",
+      "keywords": ["monorepo", "environment", "variables", "inheritance", "turborepo", "scope"],
+      "applicable_versions": {
+        "turborepo": "latest",
+        "node": ">=16.0.0"
+      },
+      "context": {
+        "project_type": "monorepo",
+        "build_tool": "turborepo"
+      },
+      "severity": "medium"
+    },
+    {
+      "id": "k018",
+      "title": "Development environment essential tools check",
+      "type": "problem",
+      "tags": ["setup", "dependencies", "tools-check", "development-environment"],
+      "date": "2025-06-22",
+      "file": "current-local/troubleshooting.md#k018",
+      "keywords": ["setup", "tools", "dependencies", "pnpm", "postgresql", "docker", "environment"],
+      "applicable_versions": {
+        "node": ">=16.0.0",
+        "pnpm": "latest",
+        "postgresql": ">=12.0",
+        "docker": ">=20.0.0"
+      },
+      "context": {
+        "environment": "development",
+        "setup": "initial"
+      },
+      "severity": "low"
+    },
+    {
       "id": "k031",
       "title": "Claude Codeへの効果的な指示方法",
       "type": "lesson",
@@ -288,18 +378,18 @@
     }
   ],
   "statistics": {
-    "total_entries": 17,
+    "total_entries": 22,
     "by_type": {
-      "problem": 7,
+      "problem": 12,
       "solution": 2,
       "pattern": 4,
       "decision": 3,
       "lesson": 1
     },
     "by_severity": {
-      "high": 1,
-      "medium": 3,
-      "low": 3
+      "high": 3,
+      "medium": 5,
+      "low": 4
     }
   }
 }
