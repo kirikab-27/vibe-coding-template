@@ -135,9 +135,37 @@ claude update
 ├── knowledge-graph.json    # 知識間の関係性
 ├── archive/          # 過去の知識アーカイブ
 └── tags/            # タグ別整理
+
+.ai/prompts/          # v2.3: プロンプトテンプレート
+├── session-start.md      # 開発開始時の定型文
+├── error-handling.md     # エラー発生時の記録促進
+├── feature-complete.md   # 機能完成時の知識抽出
+├── session-end.md        # セッション終了時のまとめ
+└── knowledge-recording-checklist.md  # 知識記録チェックリスト
 ```
 
 ### 知識の記録ルール（必須）
+
+#### v2.3: 知識記録のガイドライン
+**重要: 開発中は以下のタイミングで必ず知識を記録してください:**
+
+1. **セッション開始時**
+   - `.ai/prompts/session-start.md` を参照
+   - 本日の目標と関連知識を確認
+
+2. **エラー発生時**
+   - `.ai/prompts/error-handling.md` を参照
+   - 解決に30分以上かかったら必ず記録
+
+3. **機能完成時**
+   - `.ai/prompts/feature-complete.md` を参照
+   - 実装パターンと学びを抽出
+
+4. **セッション終了時**
+   - `.ai/prompts/session-end.md` を参照
+   - 振り返りと次回への引き継ぎ
+
+#### 基本的な記録ルール
 1. **新しい問題/解決策は必ず一意のIDを付与**
    - 形式: `k001`, `k002` など
    - 自動採番: `node .ai/scripts/knowledge-manager.js add-entry`
@@ -158,6 +186,12 @@ claude update
 
 4. **index.jsonとknowledge-graph.jsonを同時更新**
    - 手動更新または知識管理スクリプトを使用
+
+#### 30分ごとのリマインダー
+開発中は定期的に以下を確認:
+- [ ] 新しいエラーは記録したか
+- [ ] 実装パターンは文書化したか
+- [ ] 効率化のヒントはあるか
 
 ### 知識の検索ルール
 1. **現在のコンテキストから関連キーワードを抽出**
@@ -723,5 +757,5 @@ git push origin main
 
 ---
 
-最終更新: 2025-06-21
-次回レビュー予定: 2025-07-21
+最終更新: 2025-06-23 (v2.3準備)
+次回レビュー予定: 2025-07-23

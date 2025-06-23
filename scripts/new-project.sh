@@ -296,6 +296,10 @@ main() {
     echo "  🔗 .ai/knowledge/shared/ - Shared knowledge base"
     echo "  🔗 .ai/knowledge/current-local/ - Project-specific knowledge"
     echo
+    print_warning "重要: 開発中の知見は随時ナレッジベースに記録してください"
+    echo "💡 ヒント: 'エラーと解決策をkXXXとして記録' と指示"
+    echo "📋 詳細: .ai/prompts/ ディレクトリのプロンプトテンプレートを参照"
+    echo
     print_info "Happy coding with AI! 🤖✨"
 }
 
