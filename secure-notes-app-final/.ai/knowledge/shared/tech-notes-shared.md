@@ -1,0 +1,1 @@
+/home/kirikab/vibe-shared-knowledge/tech-notes/tech-notes-shared.md

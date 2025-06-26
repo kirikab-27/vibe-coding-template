@@ -1,0 +1,1 @@
+/home/kirikab/vibe-shared-knowledge/lessons-learned/lessons-learned-shared.md

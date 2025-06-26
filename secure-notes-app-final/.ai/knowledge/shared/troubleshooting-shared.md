@@ -1,0 +1,1 @@
+/home/kirikab/vibe-shared-knowledge/troubleshooting/troubleshooting-shared.md
